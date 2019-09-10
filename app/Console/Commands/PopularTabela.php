@@ -39,25 +39,25 @@ class PopularTabela extends Command {
         foreach ($arrayCategorias as $cat) {
             $categoria = new App\Categoria();
             $categoria->nomcat = $cat;
-            //$categoria->save();
+            $categoria->save();
         }
         
         //Defini no modelo
         //protected $primaryKey = 'codcat';
         
-        App\Categoria::where('codcat', 1)->delete();
-        App\Categoria::where('codcat', 5)->delete();
+       // App\Categoria::where('codcat', 1)->delete();
+       /// App\Categoria::where('codcat', 5)->delete();
         
-        $categoriaSelecionada = App\Categoria::find(10);
-        $categoriaSelecionada->nomcat = "oioioioioi";
-        $categoriaSelecionada->save();
+      ///  $categoriaSelecionada = App\Categoria::find(10);
+       /// $categoriaSelecionada->nomcat = "oioioioioi";
+        //$categoriaSelecionada->save();
    
-        $listaCategorias = App\Categoria::all();
+      //  $listaCategorias = App\Categoria::all();
         
-        foreach ($listaCategorias as $l) {
-            $this->info($l->nomcat);
+       // foreach ($listaCategorias as $l) {
+        //    $this->info($l->nomcat);
            
-        }
+       // }
         
         
     }
