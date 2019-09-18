@@ -27,8 +27,7 @@ class CategoriaController extends Controller {
     public function destroy($codcat) {
         $categoria = \App\Categoria::find($codcat);
         $categoria->delete();
-        
-        return redirect('/categoria')->with('catEliminada', 'Categoria eliminada');
+        return "true";
     }
     
     public function edit($codcat) {
