@@ -43,11 +43,14 @@ function mostrarEsconderTitulo() {
  * Rotina para adicionar categorias
  * */
 function adicionarCategoria(destino) {
-    
-        dadosForm = $('#formAdd').serialize();
-        nomcat = $('#nomcat').val();
-        
-        if (nomcat.trim() != "") {
+
+    dadosForm = $('#formAdd').serialize();
+    nomcat = $('#nomcat').val();
+
+    //Trava o botão adicionar
+    $('#btnSalvar').attr('disabled', 'true');
+
+    if (nomcat.trim() != "") {
         $.ajax({
 
             method: 'post',
@@ -55,29 +58,48 @@ function adicionarCategoria(destino) {
             data: dadosForm,
             dataType: 'html',
             success: function (data) {
-               if (data == "true") {
-                   alert('Categoria adicionada com sucesso !');
-                   
-                   //Redireciona o usuário
-                   //location.href='https://google.com';
-                   
-                   $('#nomcat').val('');
-                   $('#nomcat').focus();
-                   
-               } else {
-                   alert('Falha ao adicionar categoria !');
-               }
+                if (data == "true") {
+
+                    msg = 'Categoria adicionada com sucesso !';
+                    $('#status').hide();
+                    $('#status').html('<h4 class="sucesso">' + msg + '</h4>');
+                    $('#status').fadeIn(800);
+
+                    //Redireciona o usuário
+                    //location.href='https://google.com';
+
+                    $('#nomcat').val('');
+                    $('#nomcat').focus();
+
+                    //Destrava o botão
+                    $('#btnSalvar').removeAttr('disabled');
+
+                } else {
+                    msg = 'Falha ao adicionar categoria !';
+                    $('#status').hide();
+                    $('#status').html('<h4 class="erro">' + msg + '</h4>');
+                    $('#status').fadeIn(800);
+                }
             },
             error: function (argument) {
-                alert('Erro ao eliminar categoria!');
+                msg = 'Erro ao eliminar categoria!';
+                $('#status').hide();
+                $('#status').html('<h4 class="erro">' + msg + '</h4>');
+                $('#status').fadeIn(800);
             }
 
         });
-        
+
     } else {
-        alert("Preencha todos os campos!");
+        msg = 'Preencha todos os campos!';
+        $('#status').hide();
+        $('#status').html('<h4 class="erro">' + msg + '</h4>');
+        $('#status').fadeIn(800);
+
+        //Destrava o botão
+        $('#btnSalvar').removeAttr('disabled');
     }
 
     return false;
-    
+
 }
